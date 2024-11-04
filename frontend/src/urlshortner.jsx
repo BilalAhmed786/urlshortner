@@ -12,9 +12,10 @@ function UrlShortener() {
     try {
       const response = await axios.post('/api/url/shorten', { originalUrl: url });
       setShortCode(response.data.shortUrl);
-      setvalidation('')
+      setvalidation('');
+      setUrl('');
     } catch (error) {
-      setvalidation(error.response.data)
+      setvalidation(error.response.data);
     }
     
   };
