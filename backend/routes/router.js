@@ -9,6 +9,10 @@ router.post('/shorten', async (req, res) => {
         const shortCode = nanoid(8);
 
         // Check if `originalUrl` starts with 'http://', 'https://', or 'www'
+        if(!originalUrl){
+
+                return res.status(400).json('url is required')
+         }
 
         if (originalUrl.startsWith('www.')) {
             originalUrl = `http://${originalUrl}`;

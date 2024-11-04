@@ -3,6 +3,7 @@ import axios from 'axios';
 
 function UrlShortener() {
   const [url, setUrl] = useState('');
+  const [validation,setvalidation] = useState('')
   const [shortcode, setShortCode] = useState('');
 
   const handleSubmit = async (e) => {
@@ -11,9 +12,11 @@ function UrlShortener() {
     try {
       const response = await axios.post('/api/url/shorten', { originalUrl: url });
       setShortCode(response.data.shortUrl);
+      setvalidation('')
     } catch (error) {
-      console.log(error);
+      setvalidation(error.response.data)
     }
+    
   };
 
 
@@ -21,6 +24,7 @@ function UrlShortener() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        {validation?validation:''}
         <input
           type="text"
           placeholder="Enter URL"
